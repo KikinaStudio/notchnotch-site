@@ -72,16 +72,17 @@ html[class~="dark"] {
   z-index: 1;
 }
 
-.nn-hero h1 {
+.nn-slogan {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
   max-width: 800px;
+  color: var(--nn-text);
 }
 
-.nn-hero h1 .nn-highlight {
+.nn-slogan .nn-highlight {
   background: linear-gradient(135deg, var(--nn-violet) 0%, var(--nn-violet-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

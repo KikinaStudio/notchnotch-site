@@ -8,11 +8,11 @@ export default function HomePage() {
       {/* Hero */}
       <section className="nn-hero">
         <div className="nn-badge">macOS 14+ &middot; Open Source &middot; v1.0</div>
-        <h1>
-          Your MacBook already has<br />
-          <span className="nn-highlight">an AI agent.</span><br />
-          It just doesn't know it yet.
-        </h1>
+        <p className="nn-slogan">
+          Notch Notch!<br />
+          Who's there?<br />
+          <span className="nn-highlight">The futchure.</span>
+        </p>
         <p className="nn-subtitle">
           notchnotch puts Hermes — an open-source AI agent that reads your files,
           runs scripts, browses the web, and handles the tedious stuff — inside
