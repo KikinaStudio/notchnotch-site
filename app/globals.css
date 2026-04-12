@@ -1,9 +1,9 @@
 /* NotchNotch custom theme overrides */
 
 :root {
-  --nn-violet: #7C3AED;
-  --nn-violet-light: #A78BFA;
-  --nn-violet-dark: #5B21B6;
+  --nn-violet: #276282;
+  --nn-violet-light: #4A9EC4;
+  --nn-violet-dark: #1B4A63;
   --nn-bg: #0a0a0a;
   --nn-bg-card: #141414;
   --nn-bg-elevated: #1a1a1a;
@@ -22,8 +22,8 @@ html {
 
 /* Override nextra docs theme colors */
 html[class~="dark"] {
-  --nextra-primary-hue: 263deg;
-  --nextra-primary-saturation: 70%;
+  --nextra-primary-hue: 201deg;
+  --nextra-primary-saturation: 54%;
 }
 
 /* Custom scrollbar */
@@ -62,7 +62,7 @@ html[class~="dark"] {
   transform: translateX(-50%);
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(39, 98, 130, 0.15) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -123,7 +123,7 @@ html[class~="dark"] {
 .nn-cta-primary:hover {
   background: var(--nn-violet-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 4px 20px rgba(39, 98, 130, 0.4);
 }
 
 .nn-cta-secondary {
@@ -336,9 +336,9 @@ html[class~="dark"] {
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 500;
-  background: rgba(124, 58, 237, 0.15);
+  background: rgba(39, 98, 130, 0.15);
   color: var(--nn-violet-light);
-  border: 1px solid rgba(124, 58, 237, 0.3);
+  border: 1px solid rgba(39, 98, 130, 0.3);
   margin-bottom: 1rem;
 }
 

@@ -64,8 +64,8 @@ export default async function RootLayout({ children }) {
       <Head
         backgroundColor={{ dark: '#0a0a0a', light: '#fafafa' }}
         color={{
-          hue: { dark: 263, light: 263 },
-          saturation: { dark: 70, light: 70 }
+          hue: { dark: 201, light: 201 },
+          saturation: { dark: 54, light: 54 }
         }}
       />
       <body>

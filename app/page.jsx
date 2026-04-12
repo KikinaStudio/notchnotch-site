@@ -105,7 +105,7 @@ export default function HomePage() {
             <div className="nn-step-content">
               <h4>Download the DMG</h4>
               <p>
-                Grab <a href="https://github.com/KikinaStudio/NotchNotch/releases/tag/v1.0" target="_blank" rel="noopener" style={{ color: '#A78BFA' }}>notchnotch-v1.0.0.dmg</a> from
+                Grab <a href="https://github.com/KikinaStudio/NotchNotch/releases/tag/v1.0" target="_blank" rel="noopener" style={{ color: '#4A9EC4' }}>notchnotch-v1.0.0.dmg</a> from
                 GitHub Releases. Drag the app to Applications, then open Terminal once and run:
               </p>
               <code className="nn-step-code">xattr -cr /Applications/notchnotch.app</code>
@@ -149,8 +149,8 @@ export default function HomePage() {
       <section className="nn-section">
         <h2 className="nn-section-title">What is Hermes?</h2>
         <p className="nn-section-subtitle">
-          <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener" style={{ color: '#A78BFA' }}>Hermes</a> is
-          an open-source AI agent built by <a href="https://nousresearch.com" target="_blank" rel="noopener" style={{ color: '#A78BFA' }}>NousResearch</a>.
+          <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener" style={{ color: '#4A9EC4' }}>Hermes</a> is
+          an open-source AI agent built by <a href="https://nousresearch.com" target="_blank" rel="noopener" style={{ color: '#4A9EC4' }}>NousResearch</a>.
           Unlike a simple chatbot, Hermes is a full agent that runs locally on your Mac
           and can actually <em>do things</em> on your behalf.
         </p>
