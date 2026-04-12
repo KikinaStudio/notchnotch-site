@@ -28,7 +28,7 @@ export default function HomePage() {
         </div>
 
         <div className="nn-hero-image">
-          <img src="/screenshots/chat.png" alt="notchnotch chat interface in the MacBook notch" />
+          <img src="/header.png" alt="notchnotch, your AI agent inside the MacBook notch" />
         </div>
       </section>
 
