@@ -149,18 +149,45 @@ export default function HomePage() {
       <section className="nn-section">
         <h2 className="nn-section-title">What is Hermes?</h2>
         <p className="nn-section-subtitle">
-          Hermes is an open-source AI agent by NousResearch. It runs on your Mac and
-          has access to 40+ tools: file operations, web browsing, shell commands,
-          calendar, cron jobs, and more. It keeps persistent memory across sessions
-          and builds a personal wiki from everything you feed it.
+          <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener" style={{ color: '#A78BFA' }}>Hermes</a> is
+          an open-source AI agent built by <a href="https://nousresearch.com" target="_blank" rel="noopener" style={{ color: '#A78BFA' }}>NousResearch</a>.
+          Unlike a simple chatbot, Hermes is a full agent that runs locally on your Mac
+          and can actually <em>do things</em> on your behalf.
         </p>
-        <p className="nn-section-subtitle" style={{ marginTop: '-1.5rem' }}>
+
+        <div className="nn-hermes-capabilities">
+          <div className="nn-hermes-col">
+            <h4>What it can do</h4>
+            <ul>
+              <li>Read, write, and organize your files</li>
+              <li>Run shell commands and scripts</li>
+              <li>Browse the web and extract information</li>
+              <li>Schedule automated tasks via cron jobs</li>
+              <li>Connect to Telegram, Discord, Slack, and more</li>
+            </ul>
+          </div>
+          <div className="nn-hermes-col">
+            <h4>What makes it different</h4>
+            <ul>
+              <li>40+ built-in tools — not just text generation</li>
+              <li>Persistent memory across sessions and restarts</li>
+              <li>Builds a personal wiki from everything you feed it</li>
+              <li>Runs 100% on your machine — no cloud backend</li>
+              <li>Extensible via MCP (Model Context Protocol)</li>
+            </ul>
+          </div>
+        </div>
+
+        <p className="nn-section-subtitle" style={{ marginTop: '0' }}>
           notchnotch is the native macOS interface for Hermes. Think of it as the
           face your agent was missing.
         </p>
-        <div style={{ textAlign: 'center' }}>
+        <div className="nn-cta-group" style={{ justifyContent: 'center' }}>
           <a href="https://github.com/NousResearch/hermes-agent" className="nn-cta nn-cta-secondary" target="_blank" rel="noopener">
             Hermes on GitHub ↗
+          </a>
+          <a href="https://nousresearch.com" className="nn-cta nn-cta-secondary" target="_blank" rel="noopener">
+            NousResearch ↗
           </a>
         </div>
       </section>

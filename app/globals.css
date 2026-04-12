@@ -363,6 +363,52 @@ html[class~="dark"] {
   border-top: 1px solid var(--nn-border);
 }
 
+/* Hermes capabilities */
+.nn-hermes-capabilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 750px;
+  margin: 0 auto 2.5rem;
+  text-align: left;
+}
+
+.nn-hermes-col h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--nn-violet-light);
+  margin-bottom: 0.75rem;
+}
+
+.nn-hermes-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nn-hermes-col li {
+  font-size: 0.9rem;
+  color: var(--nn-text-muted);
+  line-height: 1.6;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.nn-hermes-col li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--nn-violet-light);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .nn-hermes-capabilities {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Hero image */
 .nn-hero-image {
   margin-top: 3rem;
