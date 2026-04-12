@@ -28,7 +28,19 @@ html {
 .nn-hermes-col h4,
 .nn-install-method h4 {
   font-family: var(--font-instrument-serif), serif;
-  font-style: italic;
+}
+
+/* DM Mono Light for body content */
+.nn-subtitle,
+.nn-section-subtitle,
+.nn-feature-card p,
+.nn-step-content p,
+.nn-hermes-col li,
+.nn-step-note,
+.nn-install-alt,
+.nn-badge,
+.nn-footer {
+  font-family: var(--font-dm-mono), monospace;
 }
 
 /* Override nextra docs theme colors */
