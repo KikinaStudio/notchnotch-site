@@ -20,6 +20,17 @@ html {
   color-scheme: dark;
 }
 
+/* Instrument Serif for headings */
+.nn-slogan,
+.nn-section-title,
+.nn-feature-card h3,
+.nn-step-content h4,
+.nn-hermes-col h4,
+.nn-install-method h4 {
+  font-family: var(--font-instrument-serif), serif;
+  font-style: italic;
+}
+
 /* Override nextra docs theme colors */
 html[class~="dark"] {
   --nextra-primary-hue: 201deg;

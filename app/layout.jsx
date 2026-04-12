@@ -1,8 +1,16 @@
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head, Search } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
+import { Instrument_Serif } from 'next/font/google'
 import 'nextra-theme-docs/style.css'
 import './globals.css'
+
+const instrumentSerif = Instrument_Serif({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-instrument-serif',
+  display: 'swap'
+})
 
 export const metadata = {
   title: {
@@ -60,6 +68,7 @@ export default async function RootLayout({ children }) {
       lang="en"
       dir="ltr"
       suppressHydrationWarning
+      className={instrumentSerif.variable}
     >
       <Head
         backgroundColor={{ dark: '#0a0a0a', light: '#fafafa' }}
