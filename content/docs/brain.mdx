@@ -1,0 +1,84 @@
+# Brain
+
+The Brain is everything your agent knows. It's a combination of facts it has learned from your conversations, skills it can use, and articles it has written or that you've fed it. You can browse all of this from the Brain panel, and you can feed it new information in several ways.
+
+## Opening the Brain panel
+
+Click the burger menu icon (top-right of the notch when it's open), then click the brain icon. The panel has three tabs: Memory, Skills, and Wiki.
+
+## Memory
+
+![Memory tab with saved facts and context](/screenshots/brain-memory.png)
+
+The Memory tab shows cards parsed from your agent's memory files. Each card is a thematic block: a fact, a project context, a person's details, your preferences.
+
+For example, after a few conversations your agent might have cards like:
+
+- "User prefers dark roast coffee, lives in Paris"
+- "Project NotchNotch: macOS app, Swift/SwiftUI, talks to Hermes on localhost:8642"
+- "Dentist appointment on March 15th"
+
+Your agent builds this memory automatically from your conversations. You can also feed it explicitly (see below).
+
+## Skills
+
+![Skills tab listing agent capabilities](/screenshots/brain-skills.png)
+
+The Skills tab lists all installed agent skills with category badges and descriptions. These are capabilities that extend what your agent can do — web browsing, file management, calendar access, and more.
+
+Tap any skill to see its full description.
+
+## Wiki
+
+![Wiki tab with knowledge base articles](/screenshots/brain-wiki.png)
+
+The Wiki tab is a Karpathy-style knowledge base. When you feed your agent raw information (articles, documents, notes), it compiles them into structured wiki articles with backlinks.
+
+The wiki tab shows:
+
+- Total article count
+- Last-updated timestamp
+- An **"Ask"** button on each article — tap it to send a question about that article directly to your agent
+
+The wiki tab is a launchpad, not a reader. Your agent answers questions about its wiki articles through the chat.
+
+## Feeding the brain
+
+There are several ways to add knowledge to your agent's brain:
+
+### Drag and drop
+
+Drag any file onto the notch. When the drop zone appears, drop it on the **right side** (brain icon) to save it to memory, or on the **left side** (chat icon) to attach it to the current message.
+
+Supported formats: images, PDFs, code (35+ languages), text, CSV, JSON, YAML.
+
+### Voice memos
+
+Triple-tap the Control key from any app to start recording. When you're done, you get two options:
+
+- **Talk** — transcribes and sends as a chat message
+- **Brain Dump** — transcribes and saves directly to your agent's memory
+
+This is great for quick thoughts, meeting notes, or ideas you want your agent to remember without starting a conversation.
+
+### Paste images
+
+Press Cmd+V with an image in your clipboard. The image is saved and can be sent to the brain.
+
+### NotchNotch Clipper
+
+The [NotchNotch Clipper](/docs/clipper) is a Chrome extension that clips any web page straight into your agent's brain. One click, and the page content is saved.
+
+### Through conversation
+
+Simply tell your agent to remember something:
+
+> "Remember that the project deadline is June 15th"
+
+> "Save this recipe to your memory: ..."
+
+Your agent uses its memory tool to store the information. It decides whether to put it in its fact memory or process it into a wiki article.
+
+## Refreshing the brain
+
+The Brain panel loads data once when you open it. If you've just saved new content (via drag-and-drop, voice memo, or the Clipper), click the refresh button to reload.

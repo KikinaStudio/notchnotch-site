@@ -1,0 +1,105 @@
+# Troubleshooting
+
+## "macOS cannot verify that this app is free from malware"
+
+notchnotch is not signed with an Apple Developer certificate. macOS blocks unsigned apps by default.
+
+**Fix:**
+
+If you installed via Homebrew with `--no-quarantine`, this should not happen. If you downloaded the DMG manually:
+
+```bash
+xattr -cr /Applications/notchnotch.app
+```
+
+Then open normally. This clears the quarantine flag.
+
+import { Callout } from 'nextra/components'
+
+<Callout type="warning">
+  Don't look for "Allow Anyway" in System Settings — it's buried and unreliable. The `xattr -cr` command is the canonical bypass.
+</Callout>
+
+## The notch doesn't appear
+
+- Make sure notchnotch is running (check the menu bar for the notchnotch icon)
+- Try hovering slowly over the notch area — there's a 300ms delay before it opens
+- Click the notch area directly as an alternative to hovering
+
+## Hermes is not responding
+
+Check if Hermes is running:
+
+```bash
+curl http://localhost:8642/health
+```
+
+If you get no response, Hermes is not running. notchnotch starts it automatically during onboarding, but if it crashed:
+
+```bash
+cd ~/.hermes/hermes-agent && ./venv/bin/python3 hermes gateway run
+```
+
+<Callout type="info">
+  Hermes must be started with `./venv/bin/python3`, not system Python. System Python on macOS is 3.9, and Hermes requires 3.10+.
+</Callout>
+
+## Messages are slow
+
+A few things to check:
+
+- **Model choice** — larger models are slower. If you're using a local model, make sure your Mac has enough RAM
+- **Max iterations** — if set to "Deep", your agent takes more steps. Try "Quick" in Settings
+- **Network** — if using a cloud provider (OpenRouter, OpenAI), check your internet connection
+
+## Voice recording hotkey doesn't work
+
+The global hotkey (triple-tap Control) requires Accessibility access:
+
+1. Open **System Settings**
+2. Go to **Privacy & Security > Accessibility**
+3. Add **notchnotch** to the list
+4. Restart notchnotch
+
+## Files are not being extracted
+
+notchnotch extracts text from files up to 50,000 characters. If a file is not being processed:
+
+- Check the file format — supported: text, PDF, RTF, code (35+ languages), CSV, JSON, YAML, images
+- Very large files may be truncated
+- Binary files (videos, executables, ZIP archives) cannot be extracted
+
+## The Brain panel is empty
+
+- Click the refresh button in the Brain panel
+- Check if Hermes memory files exist: `ls ~/.hermes/memories/`
+- If the files don't exist, your agent hasn't saved any memories yet. Try telling it something to remember
+
+## Telegram is not working
+
+- Your Mac must be on and awake
+- Hermes must be running
+- Check Settings > Session to verify the Telegram session was detected
+- If the session is not detected, check `~/.hermes/state.db`:
+
+```bash
+sqlite3 ~/.hermes/state.db "SELECT id, source FROM sessions WHERE source='telegram' ORDER BY started_at DESC LIMIT 1"
+```
+
+## How do I reset everything?
+
+To start fresh:
+
+```bash
+# Remove notchnotch preferences
+defaults delete com.kikinastudio.notchnotch
+
+# Remove Hermes (optional — this deletes all memories and settings)
+rm -rf ~/.hermes
+```
+
+Then relaunch notchnotch. The onboarding will start again.
+
+## Something else?
+
+Open an issue on [GitHub](https://github.com/KikinaStudio/Notchnotch/issues).

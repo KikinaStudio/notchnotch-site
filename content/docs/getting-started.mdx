@@ -1,0 +1,117 @@
+# Getting Started
+
+This guide walks you through installing notchnotch and sending your first message. The whole process takes about two minutes.
+
+## Requirements
+
+- **macOS 14** (Sonoma) or later
+- A MacBook with a notch (works on non-notch Macs too — the panel appears at top-center)
+
+That's it. No Xcode, no Homebrew (unless you want to use it to install), no developer tools.
+
+## Install
+
+import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+<Tabs items={['Homebrew', 'DMG Download', 'Build from source']}>
+  <Tabs.Tab>
+    The easiest method. Run this in Terminal:
+
+    ```bash
+    brew install --cask KikinaStudio/tap/notchnotch --no-quarantine
+    ```
+
+    The `--no-quarantine` flag tells macOS to skip the Gatekeeper check. This is safe — the app is open source and you can verify the code yourself.
+  </Tabs.Tab>
+  <Tabs.Tab>
+    1. Download the DMG from [GitHub Releases](https://github.com/KikinaStudio/Notchnotch/releases)
+    2. Drag notchnotch to your Applications folder
+    3. Open Terminal and run:
+
+    ```bash
+    xattr -cr /Applications/notchnotch.app
+    ```
+
+    This clears the macOS quarantine flag. The app is not signed with an Apple Developer certificate yet, so macOS would block it otherwise.
+
+    <Callout type="info">
+      Don't look for "Allow Anyway" in System Settings — it's buried and unreliable. The `xattr -cr` command is the canonical bypass.
+    </Callout>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    If you want to build from source:
+
+    ```bash
+    git clone https://github.com/KikinaStudio/Notchnotch.git
+    cd NotchNotch
+    bash scripts/run.sh
+    ```
+
+    No Xcode required. Only Command Line Tools: `xcode-select --install`.
+  </Tabs.Tab>
+</Tabs>
+
+## First launch
+
+When you open notchnotch for the first time, a guided onboarding walks you through everything:
+
+![Onboarding welcome screen](/screenshots/onboarding-start.png)
+
+import { Steps } from 'nextra/components'
+
+<Steps>
+### Welcome
+The notchnotch logo appears. Click "Continue".
+
+### Privacy
+A quick explanation of what stays local and what goes to your AI provider. Everything runs on your Mac — the only external call is to the model provider you choose.
+
+![Privacy explanation screen](/screenshots/onboarding-privacy.png)
+
+### Install Hermes
+Hermes (the AI agent engine) installs automatically in the background. This takes about a minute. You don't have to do anything.
+
+![Hermes installation loading screen](/screenshots/onboarding-loading.png)
+
+### Pick a model
+Choose a free AI model from Nous Portal. Zero configuration, no API key needed. You can switch to other providers (OpenRouter, OpenAI, Anthropic) later in Settings.
+
+### Telegram (optional)
+Connect a Telegram bot to continue conversations from your phone. You can skip this and set it up later.
+
+### Ready
+Done. The notch is active.
+</Steps>
+
+<Callout type="info">
+  If you already have Hermes installed (`~/.hermes/config.yaml` exists), the onboarding is skipped entirely. notchnotch detects it and goes straight to the chat.
+</Callout>
+
+## Your first conversation
+
+Hover the notch — the chat panel opens with a spring animation. Type something and press Return. A few things to try:
+
+- **"Hello, what can you do?"** — your agent will explain its capabilities
+- **"What's in my Downloads folder?"** — it reads your filesystem
+- **"Summarize this"** + drag a PDF onto the notch — it extracts and summarizes the text
+- **"Remember that I prefer dark roast coffee"** — it saves this to its memory
+
+The braille spinner (`⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏`) replaces the send button while your agent is thinking. Click it to cancel.
+
+## Permissions
+
+macOS will ask for a few permissions the first time you use certain features:
+
+- **Microphone** — only when you tap the mic button or use voice memos
+- **Speech Recognition** — for on-device transcription (nothing leaves your Mac)
+- **Accessibility** — for the global hotkey (triple-tap Control). You need to add notchnotch manually in System Settings > Privacy & Security > Accessibility
+
+## What's next?
+
+Now that you're set up, explore the main features:
+
+- [Feed your agent's brain](/docs/brain) with files, voice memos, and web clips
+- [Set up routines](/docs/routines) for automated tasks
+- [Connect Telegram](/docs/telegram) for mobile access
+- [Configure providers and models](/docs/settings) in Settings

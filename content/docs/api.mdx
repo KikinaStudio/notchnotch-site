@@ -1,0 +1,114 @@
+# API Reference
+
+notchnotch communicates with Hermes via two HTTP endpoints.
+
+## Hermes API
+
+### Health check
+
+```
+GET http://localhost:8642/health
+```
+
+Returns `200 OK` if Hermes is running.
+
+### Send a message
+
+```
+POST http://localhost:8642/v1/responses
+Content-Type: application/json
+X-Hermes-Session-Id: <session-id>
+```
+
+**Request body:**
+
+```json
+{
+  "model": "hermes-agent",
+  "input": "Hello!",
+  "conversation": "notchnotch-abc12345",
+  "store": true
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `model` | string | Always `"hermes-agent"` |
+| `input` | string or array | The user message, or an array of `[system_msg, user_msg]` when system context is provided |
+| `conversation` | string | A UUID identifying the conversation. Hermes persists the full history server-side |
+| `store` | boolean | Whether to save this exchange in the conversation history. Set to `false` for brain saves and fire-and-forget operations |
+
+**Response:**
+
+The response contains an `output` array with items of different types:
+
+```json
+{
+  "output": [
+    { "type": "reasoning", "content": "..." },
+    { "type": "function_call", "name": "read_file", "arguments": "..." },
+    { "type": "function_call_output", "output": "..." },
+    { "type": "message", "content": [{ "type": "text", "text": "Here is the result." }] }
+  ],
+  "usage": {
+    "input_tokens": 1200,
+    "output_tokens": 450
+  }
+}
+```
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+  Note: Hermes uses `input_tokens` and `output_tokens` as key names, not `prompt_tokens` / `completion_tokens`.
+</Callout>
+
+**Timeouts:** 300s request, 600s resource.
+
+## ClipperListener
+
+notchnotch runs a tiny HTTP server on port 19944 for receiving toast notifications from the NotchNotch Clipper Chrome extension.
+
+### Notify a clip
+
+```
+POST http://localhost:19944/clip
+Content-Type: application/json
+```
+
+**Request body:**
+
+```json
+{
+  "title": "Page Title",
+  "url": "https://example.com/article"
+}
+```
+
+**Response:** `200 OK` with `{"status": "ok"}`
+
+This triggers a pacman toast animation in the notch. The actual content saving is done by the Clipper directly via the Hermes API — this endpoint only handles the notification.
+
+### CORS
+
+The ClipperListener supports CORS preflight (`OPTIONS`) requests so the Chrome extension can call it from any origin.
+
+## Configuration files
+
+| File | Location | Purpose |
+|------|----------|---------|
+| `config.yaml` | `~/.hermes/config.yaml` | Hermes configuration (provider, API keys, model) |
+| `state.db` | `~/.hermes/state.db` | Session database (SQLite, readonly from notchnotch) |
+| `jobs.json` | `~/.hermes/cron/jobs.json` | Active cron jobs |
+| `MEMORY.md` | `~/.hermes/memories/MEMORY.md` | Agent-curated facts |
+| `USER.md` | `~/.hermes/memories/USER.md` | User profile and preferences |
+| `wiki/` | `~/.hermes/brain/wiki/` | Knowledge base articles |
+
+## UserDefaults keys
+
+| Key | Type | Purpose |
+|-----|------|---------|
+| `hermesSessionId` | String | Auto-linked Telegram session ID |
+| `hermesConversationId` | String | Server-side conversation UUID |
+| `onboardingCompleted` | Bool | Skips onboarding on future launches |
+| `selectedProvider` | String | AI provider chosen during onboarding |

@@ -1,0 +1,59 @@
+# NotchNotch Clipper
+
+The NotchNotch Clipper is a Chrome extension that clips any web page straight into your agent's brain. One click, and the article, recipe, documentation, or whatever you're reading is saved to Hermes's memory.
+
+## Install
+
+The Clipper is a separate project: [KikinaStudio/NotchNotch-Clipper](https://github.com/KikinaStudio/NotchNotch-Clipper).
+
+import { Steps } from 'nextra/components'
+
+<Steps>
+### Clone the repo
+```bash
+git clone https://github.com/KikinaStudio/NotchNotch-Clipper.git
+```
+
+### Load in Chrome
+1. Open `chrome://extensions`
+2. Enable "Developer mode" (top-right toggle)
+3. Click "Load unpacked"
+4. Select the cloned folder
+</Steps>
+
+import { Callout } from 'nextra/components'
+
+<Callout type="warning">
+  Chrome extensions cannot be loaded remotely from GitHub — "Load unpacked" requires a local directory path. The folder must stay on your disk.
+</Callout>
+
+## How it works
+
+1. Navigate to any web page you want to save
+2. Click the Clipper extension icon in your Chrome toolbar
+3. The extension extracts the page content (title, URL, main text or your selection)
+4. It sends the content directly to Hermes's API (`POST /v1/responses` on `localhost:8642`) with a save-to-memory prompt
+5. On success, it notifies notchnotch via `localhost:19944/clip`
+6. A pacman toast animation appears under the notch, confirming the clip
+
+## What gets saved
+
+- **Page title** and **URL**
+- **Full article text** (extracted via Mozilla's Readability library) or **your selected text** if you highlighted something before clicking
+
+The content is processed by Hermes, which decides whether to store it as a memory block or compile it into a wiki article.
+
+## Viewing clipped content
+
+Open the [Brain panel](/docs/brain):
+
+- **Memory tab** — clipped facts and summaries appear as cards
+- **Wiki tab** — if your agent has compiled articles from clipped content, they appear here
+
+Click the refresh button if you just clipped something and don't see it yet.
+
+## Requirements
+
+- notchnotch must be running (for the toast notification)
+- Hermes must be running on `localhost:8642` (for the actual save)
+- Chrome or any Chromium-based browser

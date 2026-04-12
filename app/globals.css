@@ -1,0 +1,353 @@
+/* NotchNotch custom theme overrides */
+
+:root {
+  --nn-violet: #7C3AED;
+  --nn-violet-light: #A78BFA;
+  --nn-violet-dark: #5B21B6;
+  --nn-bg: #0a0a0a;
+  --nn-bg-card: #141414;
+  --nn-bg-elevated: #1a1a1a;
+  --nn-border: #262626;
+  --nn-text: #fafafa;
+  --nn-text-muted: #a1a1aa;
+  --nn-green: #22c55e;
+  --nn-orange: #f97316;
+  --nn-blue: #3b82f6;
+}
+
+/* Force dark mode defaults */
+html {
+  color-scheme: dark;
+}
+
+/* Override nextra docs theme colors */
+html[class~="dark"] {
+  --nextra-primary-hue: 263deg;
+  --nextra-primary-saturation: 70%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Hero section styles */
+.nn-hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.nn-hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nn-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.nn-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+}
+
+.nn-hero h1 .nn-highlight {
+  background: linear-gradient(135deg, var(--nn-violet) 0%, var(--nn-violet-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nn-hero .nn-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  color: var(--nn-text-muted);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.nn-cta-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nn-cta-primary {
+  background: var(--nn-violet);
+  color: white;
+}
+.nn-cta-primary:hover {
+  background: var(--nn-violet-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+}
+
+.nn-cta-secondary {
+  background: var(--nn-bg-elevated);
+  color: var(--nn-text);
+  border: 1px solid var(--nn-border);
+}
+.nn-cta-secondary:hover {
+  background: var(--nn-bg-card);
+  border-color: var(--nn-violet);
+}
+
+/* Notch shape SVG motif */
+.nn-notch-shape {
+  width: 200px;
+  height: 32px;
+  margin: 0 auto 2rem;
+  opacity: 0.5;
+}
+
+/* Feature grid */
+.nn-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 4rem 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.nn-feature-card {
+  background: var(--nn-bg-card);
+  border: 1px solid var(--nn-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.nn-feature-card:hover {
+  border-color: var(--nn-violet);
+  transform: translateY(-2px);
+}
+
+.nn-feature-card .nn-feature-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.nn-feature-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--nn-text);
+}
+
+.nn-feature-card p {
+  font-size: 0.9rem;
+  color: var(--nn-text-muted);
+  line-height: 1.6;
+}
+
+/* Section styles */
+.nn-section {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.nn-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.nn-section-subtitle {
+  font-size: 1.1rem;
+  color: var(--nn-text-muted);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+/* Install section */
+.nn-install {
+  background: var(--nn-bg-card);
+  border: 1px solid var(--nn-border);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.nn-install-method {
+  margin-bottom: 1.5rem;
+}
+.nn-install-method:last-child {
+  margin-bottom: 0;
+}
+
+.nn-install-method h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--nn-violet-light);
+  margin-bottom: 0.5rem;
+}
+
+.nn-install-method code {
+  display: block;
+  background: var(--nn-bg);
+  border: 1px solid var(--nn-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: var(--nn-text);
+  overflow-x: auto;
+}
+
+/* How it works */
+.nn-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.nn-step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.nn-step-number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--nn-violet);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.nn-step-content h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.nn-step-content p {
+  font-size: 0.9rem;
+  color: var(--nn-text-muted);
+  line-height: 1.6;
+}
+
+/* Badge */
+.nn-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--nn-violet-light);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  margin-bottom: 1rem;
+}
+
+/* Keyboard shortcut */
+.nn-kbd {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: var(--nn-bg-elevated);
+  border: 1px solid var(--nn-border);
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--nn-text-muted);
+}
+
+/* Footer override */
+.nn-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--nn-text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--nn-border);
+}
+
+/* Hero image */
+.nn-hero-image {
+  margin-top: 3rem;
+  max-width: 620px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--nn-border);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.nn-hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .nn-features {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem;
+  }
+  .nn-hero {
+    min-height: 80vh;
+    padding: 1.5rem;
+  }
+  .nn-section {
+    padding: 3rem 1rem;
+  }
+}

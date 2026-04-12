@@ -1,0 +1,122 @@
+# Architecture
+
+This page is for contributors and developers who want to understand how notchnotch works internally.
+
+## High-level overview
+
+```
+notchnotch (NSPanel, always-on-top, level mainMenu+3)
+    |
+    +-- NotchShape (custom animatable path, quad curves)
+    |     Closed: matches hardware notch (~185x32pt)
+    |     Open: expanded chat panel (580x340pt)
+    |
+    +-- Top bar (when open)
+    |     Left: search button
+    |     Right: settings button
+    |
+    +-- Content (when open)
+    |     Onboarding flow (6 screens, first launch only)
+    |     Welcome screen (logo + tagline)
+    |     ChatView, RoutinesView, BrainView,
+    |     ConversationHistoryView, SettingsView
+    |
+    +-- Overlays
+    |     KITT scanner (recording), Braille spinner (thinking)
+    |     Drop overlay (file drag), Toast (response preview)
+    |
+    +-- Services
+          HermesClient -> localhost:8642
+          SessionStore -> auto-detect Telegram from state.db
+          CronStore, HermesConfig, ClipperListener,
+          SpeechTranscriber, DocumentExtractor, AudioRecorder
+```
+
+## Window system
+
+notchnotch uses a custom `NSPanel` — borderless, transparent, non-activating, at window level `mainMenu + 3`. The panel joins all spaces and only becomes key when the notch is open.
+
+The fixed panel size is 620x380pt. Content animates inside via the `NotchShape` clipping path.
+
+## NotchShape
+
+A custom SwiftUI `Shape` with `animatableData` for smooth corner radius transitions. Quad curves approximate the hardware notch silhouette:
+
+- **Closed**: top corner radius 6pt, bottom 10pt
+- **Open**: top corner radius 14pt, bottom 18pt
+
+The shape follows the concentric rectangle principle (same as Apple's Dynamic Island): `innerRadius = outerRadius - padding`.
+
+## Communication with Hermes
+
+All communication goes through `HermesClient.swift`:
+
+- **Endpoint**: `POST /v1/responses` on `localhost:8642`
+- **Headers**: `Content-Type: application/json`, `X-Hermes-Session-Id: <id>`
+- **Conversation persistence**: a UUID stored in UserDefaults (`hermesConversationId`) is sent as the `conversation` parameter. Hermes maintains the full conversation history server-side
+
+The response `output` array is parsed into three channels:
+
+1. **Thinking** — `type: "reasoning"` items
+2. **Tool calls** — `type: "function_call"` and `type: "function_call_output"` items
+3. **Response** — `type: "message"` with `content[].text`
+
+Token counts come from the top-level `usage` field (`input_tokens`, `output_tokens`).
+
+## Brain save pattern
+
+The drop zone "Save to brain", voice notes, and the Clipper extension all use the same flow:
+
+1. `ChatViewModel.saveToBrain()` builds a save prompt
+2. `HermesClient.sendCompletion()` sends a non-streaming `POST /v1/responses` with `store: false`
+3. A toast confirms the save
+
+## Session auto-link
+
+On launch, `SessionStore` reads `~/.hermes/state.db`:
+
+```sql
+SELECT id FROM sessions
+WHERE source = 'telegram'
+ORDER BY started_at DESC LIMIT 1
+```
+
+This session ID is sent as `X-Hermes-Session-Id` on every request and persisted in UserDefaults.
+
+## Project structure
+
+```
+BoaNotch/
++-- Package.swift              # SwiftPM, macOS 14+
++-- scripts/run.sh             # Build + bundle + codesign + launch
++-- scripts/release.sh         # Universal binary + DMG
++-- BoaNotch/
+    +-- BoaNotchApp.swift       # @main entry point
+    +-- AppDelegate.swift       # Lifecycle, hotkeys, menu bar, voice
+    +-- Models/                 # ChatMessage, Attachment, RoutineTemplates
+    +-- ViewModels/             # NotchViewModel, ChatViewModel, SearchViewModel
+    +-- Views/                  # NotchView, ChatView, MessageBubble, etc.
+    +-- Window/                 # NotchPanel, NotchWindowController
+    +-- Onboarding/             # 6-step guided setup
+    +-- Services/               # HermesClient, SessionStore, CronStore, etc.
+```
+
+## Tech stack
+
+- **Swift 5.9 / SwiftUI** — UI, animations, layout
+- **AppKit** — NSPanel, NSEvent, NSWorkspace, NSStatusItem
+- **Carbon.HIToolbox** — Global hotkeys
+- **AVFoundation** — Audio recording
+- **Speech** — On-device transcription (SFSpeechRecognizer)
+- **SQLite3** — Hermes session database (C API, readonly)
+- **PDFKit** — PDF text extraction
+- **URLSession** — Async HTTP
+
+## Build and run
+
+```bash
+bash scripts/run.sh      # Build + bundle + codesign + launch
+bash scripts/release.sh   # Universal binary + DMG
+```
+
+No Xcode required. Command Line Tools only.

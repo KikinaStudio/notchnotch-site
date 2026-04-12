@@ -1,0 +1,50 @@
+# Settings
+
+Click the gear icon (top-right of the notch) to open Settings.
+
+## AI Provider
+
+Choose which AI service powers your agent:
+
+| Provider | What you need |
+|----------|--------------|
+| **Nous Portal** | Nothing — free, zero config. Selected by default during onboarding |
+| **OpenRouter** | An API key from [openrouter.ai](https://openrouter.ai) |
+| **OpenAI** | An API key from [platform.openai.com](https://platform.openai.com) |
+| **Anthropic** | An API key from [console.anthropic.com](https://console.anthropic.com) |
+
+Paste your API key in the text field. It is stored locally in Hermes's config file (`~/.hermes/config.yaml`) on your Mac. It is never sent anywhere except to the provider you selected.
+
+import { Callout } from 'nextra/components'
+
+<Callout type="warning">
+  Switching providers may change which models are available. Some models are better at tool use than others — if your agent starts struggling with tasks it used to handle, try a different model.
+</Callout>
+
+## Agent
+
+- **Max iterations** — controls how many steps your agent can take before giving up. Options:
+  - **Quick** — fewer steps, faster responses, good for simple questions
+  - **Normal** — balanced (default)
+  - **Deep** — more steps, better for complex multi-step tasks
+- **Streaming** — toggle streaming responses on/off
+
+## Execution
+
+Controls how your agent runs commands:
+
+- **Local** — commands run directly on your Mac (default)
+- **Docker** — commands run inside a Docker container (more isolated)
+- **SSH** — commands run on a remote machine
+
+For most users, "Local" is the right choice.
+
+## Session
+
+Shows the status of your auto-linked Telegram session:
+
+- Whether a Telegram session was detected
+- The session ID being used
+- Connection status
+
+If no Telegram session is found, this section explains how to set one up.

@@ -1,0 +1,47 @@
+# Voice Memos
+
+Record voice memos from any app and send them to your agent — either as a chat message or saved directly to the brain.
+
+## How to record
+
+**Triple-tap the Control key** from anywhere on your Mac. A recording toast appears below the notch with a pulsing red dot and a KITT-style purple scanner animation.
+
+You can also click the **microphone button** in the input bar when the notch is open.
+
+## When you're done
+
+After recording, you get two buttons:
+
+![Voice control toast with Talk and Dump options](/screenshots/voice-toast.png)
+
+- **Talk** — stops recording, transcribes the audio on-device, opens the notch, and sends the transcript as a chat message. Your agent responds as if you had typed it
+- **Brain Dump** — stops recording, transcribes, and saves the transcript directly to your agent's memory. A toast confirms "Note archived". No conversation is opened
+
+To **cancel**, triple-tap Control again while recording. The audio is discarded.
+
+## Transcription
+
+Transcription happens entirely on your Mac using Apple's built-in `SFSpeechRecognizer`. Nothing is sent to any server.
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+  The current transcription language is French. This is configured in the app and will be user-configurable in a future version.
+</Callout>
+
+If transcription fails, the Talk path falls back to sending the audio file as an attachment. The Brain Dump path shows a "Transcription failed" toast.
+
+## Permissions
+
+The first time you record, macOS will ask for:
+
+- **Microphone access** — required to capture audio
+- **Speech Recognition** — required for on-device transcription
+
+For the global hotkey (triple-tap Control) to work from any app, you also need to grant **Accessibility** access:
+
+1. Open System Settings
+2. Go to Privacy & Security > Accessibility
+3. Add notchnotch to the list
+
+Without Accessibility access, the hotkey only works when notchnotch is the frontmost app.

@@ -1,0 +1,44 @@
+# What is notchnotch?
+
+notchnotch is a native macOS app that turns your MacBook's notch into a portal to your own AI agent. It's not a chatbot — it's a full agent with access to your files, your terminal, the web, and your calendar.
+
+Under the hood, notchnotch talks to [Hermes](https://github.com/NousResearch/hermes-agent), an open-source AI agent by NousResearch. Hermes runs locally on your Mac, keeps persistent memory across sessions, and has 40+ tools at its disposal.
+
+## Who is this for?
+
+**Everyone.** notchnotch was designed so that someone who has never opened a terminal can install it and start talking to their computer in under two minutes. The guided onboarding handles everything: installing Hermes, picking a free AI model, and optionally connecting Telegram for mobile access.
+
+If you're a developer, you'll appreciate the full power of Hermes underneath — shell access, cron jobs, custom skills, MCP integration. If you're not, you'll never have to think about any of that.
+
+## What can it do?
+
+Here are some things you can ask your agent right out of the box:
+
+- "Summarize this PDF" — drag the file onto the notch
+- "Set up a daily routine that sends me a news digest on Telegram every morning"
+- "What meetings do I have tomorrow?"
+- "Read my Downloads folder and tell me what's in there"
+- "Write a Python script that renames all my photos by date"
+- "Remember that my dentist appointment is on March 15th" — it'll save this to its memory
+
+Your agent gets smarter over time as you feed it files, voice memos, and web clips.
+
+## How it works in 30 seconds
+
+1. **Hover the notch** — a chat panel opens with a spring animation
+2. **Type your question** — press Return to send
+3. **Your agent works** — it can read files, run commands, browse the web, and more
+4. **It remembers** — context persists across app restarts, across devices via Telegram
+
+The notch is always there. No window to open, no app to switch to.
+
+## Next steps
+
+import { Cards } from 'nextra/components'
+
+<Cards>
+  <Cards.Card title="Install notchnotch" href="/docs/getting-started" />
+  <Cards.Card title="Learn about the Brain" href="/docs/brain" />
+  <Cards.Card title="Set up Routines" href="/docs/routines" />
+  <Cards.Card title="What is Hermes?" href="/docs/hermes" />
+</Cards>

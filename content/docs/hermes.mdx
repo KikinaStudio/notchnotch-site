@@ -1,0 +1,58 @@
+# About Hermes
+
+notchnotch is the face. [Hermes](https://github.com/NousResearch/hermes-agent) is the brain.
+
+## What is Hermes?
+
+Hermes is an open-source AI agent built by [NousResearch](https://nousresearch.com). It runs locally on your machine and turns a language model into a full agent with access to your computer.
+
+While most AI chat apps just send your messages to a model and show the response, Hermes goes further. It can:
+
+- **Read and write files** on your disk
+- **Run shell commands** and scripts
+- **Browse the web** and extract information
+- **Manage cron jobs** for automated routines
+- **Keep persistent memory** across sessions
+- **Build a wiki** from raw information you feed it
+- **Connect to Telegram, Discord, Slack, WhatsApp, Signal, and Email**
+
+It has 40+ built-in tools and supports MCP (Model Context Protocol) for extending with custom integrations.
+
+## How notchnotch relates to Hermes
+
+notchnotch is a native macOS client for Hermes. It communicates with Hermes via HTTP on `localhost:8642`.
+
+```
+You <-> notchnotch (macOS UI) <-> Hermes (localhost:8642) <-> AI model (cloud or local)
+```
+
+Everything your agent does — reading files, running commands, saving memories — happens through Hermes. notchnotch is the interface that makes this accessible without a terminal.
+
+## Memory system
+
+Hermes has a built-in memory system:
+
+- **MEMORY.md** — agent-curated facts learned from your conversations, stored as thematic blocks separated by `§`
+- **USER.md** — your profile and preferences
+- **Wiki** — a Karpathy-style knowledge base. Raw content goes into `raw/`, and Hermes compiles it into structured articles in `wiki/` with backlinks
+
+All of this lives in `~/.hermes/memories/` and `~/.hermes/brain/` on your Mac.
+
+## Skills
+
+Hermes supports installable skills — structured capabilities that extend what the agent can do. Skills live in `~/.hermes/skills/` and are organized by category. Each skill has a `SKILL.md` file describing what it does and how to use it.
+
+## Can I use Hermes without notchnotch?
+
+Yes. Hermes has its own CLI and can be used directly from the terminal:
+
+```bash
+cd ~/.hermes/hermes-agent && ./venv/bin/python3 hermes gateway run
+```
+
+You can also talk to it via Telegram, Discord, or any of its other gateways. notchnotch is just the most convenient way to interact with it on a Mac.
+
+## Learn more
+
+- [Hermes on GitHub](https://github.com/NousResearch/hermes-agent)
+- [NousResearch](https://nousresearch.com)

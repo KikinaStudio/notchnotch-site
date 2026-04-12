@@ -1,0 +1,72 @@
+# Chat
+
+The chat panel is where you talk to your agent. It opens when you hover or click the notch, and closes when you move your cursor away.
+
+![Chat interface](/screenshots/chat.png)
+
+## Sending messages
+
+Type your message in the input bar and press **Return** to send. Your agent processes the request and streams the response.
+
+While your agent is thinking, the send button turns into a spinning braille animation. Click it to cancel the request.
+
+## Edit, copy, and retry
+
+Hover any message to reveal action buttons:
+
+- **Edit** — rewrite a message you sent, or edit an answer from your agent. The conversation is truncated from that point and regenerated
+- **Copy** — copies the message content to your clipboard
+- **Retry** — re-sends the last message for a fresh response
+
+## Attaching files
+
+Two ways to attach files:
+
+- **Drag and drop** — drag any file onto the notch. The panel highlights in violet. Supported formats: images (PNG, JPG, GIF), PDFs, code files (35+ languages), text, CSV, JSON, YAML, RTF
+- **Click the + button** — opens a file picker in the input bar
+- **Paste images** — press Cmd+V with an image in your clipboard. It's saved and attached to the message
+
+Images are sent to your AI provider for vision analysis. Text files are extracted (up to 50,000 characters) and included in the prompt.
+
+## Search
+
+Click the magnifying glass icon (top-left of the notch) to open full-text search across all messages in the current conversation.
+
+- Type to search — matches are highlighted in purple
+- Use the chevron arrows or press Enter to jump between matches
+- The counter shows your position (e.g. `3/12`)
+
+## Code blocks and markdown
+
+Your agent's responses support full markdown rendering:
+
+- Fenced code blocks with language labels and copy buttons
+- Bold, italic, inline code
+- Links (clickable)
+- Lists and headings
+
+## Inline images and file paths
+
+When your agent's response contains a file path:
+
+- **Image paths** (PNG, JPG, GIF) render as inline thumbnails (280 x 200px). Click to open, right-click to reveal in Finder
+- **Other file paths** render as color-coded cards — purple for code, pink for audio, blue for video, green for images, red for PDFs. Click to open in the default app
+
+## Thinking and tool calls
+
+Your agent sometimes reasons internally before responding, and often uses tools (reading files, running commands, browsing the web). This activity is hidden behind collapsible toggles so you only see the clean answer. Expand them if you're curious.
+
+## Toast notifications
+
+When the notch is closed and your agent finishes a response, a black toast slides out below the notch with a preview. Tap to expand the full conversation.
+
+## The expanded bar
+
+When the notch is open, a slim bar appears below the input with:
+
+![Expanded bar with model info and controls](/screenshots/chat-expanded.png)
+
+- **Model name** and provider
+- **Reasoning effort** selector (none, low, medium, high, xhigh)
+- **Context window gauge** — how many tokens were used in the last request
+- **Incognito mode** toggle — when on, messages are not saved server-side

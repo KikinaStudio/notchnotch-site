@@ -1,0 +1,53 @@
+# Telegram
+
+notchnotch can share your conversation with a Telegram bot, giving you access to the same agent from your phone. Same memory, same context, same conversation.
+
+## How it works
+
+Hermes supports multiple "gateways" — interfaces through which you can talk to it. notchnotch is one gateway, Telegram is another, and they share the same session.
+
+When notchnotch detects a Telegram session in Hermes's database, it automatically links to it. Every message you send from notchnotch and every message you send from Telegram goes to the same conversation. Your agent sees the full history regardless of which interface you used.
+
+## Setting up Telegram
+
+### During onboarding
+
+The fifth step of the guided onboarding offers to set up Telegram. You'll need:
+
+1. A Telegram bot token (create one via [@BotFather](https://t.me/botfather) on Telegram)
+2. Your Telegram user ID
+
+notchnotch writes these to Hermes's config file and starts the Telegram gateway.
+
+### After onboarding
+
+If you skipped Telegram during onboarding, you can set it up later:
+
+1. Open Settings (gear icon, top-right)
+2. Look for the **Session** section
+3. Follow the instructions to add your bot token
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+  The Telegram session is auto-detected on launch. notchnotch reads Hermes's session database (`~/.hermes/state.db`) and finds the most recent Telegram session. No manual linking required.
+</Callout>
+
+## Using Telegram
+
+Once set up, simply message your Telegram bot. It behaves exactly like the notch chat:
+
+- Ask questions, give commands
+- Your agent has the same tools and memory
+- Routine results can be delivered via Telegram
+- Conversation history is shared — start a thought on your Mac, pick it up on your phone
+
+## Conversation history
+
+In the conversation history panel, sessions from Telegram appear with a **blue icon**, while notchnotch sessions show a **purple icon** and CLI sessions show an **orange icon**. You can resume any session regardless of its origin.
+
+## Limitations
+
+- Your Mac must be running and awake for the Telegram gateway to work (Hermes runs locally)
+- If Hermes is not running, messages to the bot will queue until it starts
+- The Telegram bot is private — only your user ID can interact with it
