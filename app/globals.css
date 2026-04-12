@@ -284,6 +284,48 @@ html[class~="dark"] {
   line-height: 1.6;
 }
 
+.nn-step-code {
+  display: block;
+  background: var(--nn-bg);
+  border: 1px solid var(--nn-border);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  color: var(--nn-text);
+  margin: 0.5rem 0;
+}
+
+.nn-step-note {
+  font-size: 0.8rem !important;
+  color: var(--nn-text-muted) !important;
+  opacity: 0.7;
+  margin-top: -0.25rem !important;
+}
+
+/* Homebrew alternative */
+.nn-install-alt {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  background: var(--nn-bg-card);
+  border: 1px solid var(--nn-border);
+  border-radius: 10px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.9rem;
+  color: var(--nn-text-muted);
+}
+
+.nn-install-alt code {
+  background: var(--nn-bg);
+  border: 1px solid var(--nn-border);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  color: var(--nn-text);
+}
+
 /* Badge */
 .nn-badge {
   display: inline-flex;

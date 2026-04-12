@@ -96,24 +96,32 @@ export default function HomePage() {
       <section className="nn-section">
         <h2 className="nn-section-title">Up and running in 2 minutes</h2>
         <p className="nn-section-subtitle">
-          notchnotch handles everything on first launch. No terminal required.
+          macOS 14+. No terminal experience required.
         </p>
 
         <div className="nn-steps">
           <div className="nn-step">
             <div className="nn-step-number">1</div>
             <div className="nn-step-content">
-              <h4>Install</h4>
-              <p>Download the DMG or install with Homebrew. One command, one drag, done.</p>
+              <h4>Download the DMG</h4>
+              <p>
+                Grab <a href="https://github.com/KikinaStudio/NotchNotch/releases/tag/v1.0" target="_blank" rel="noopener" style={{ color: '#A78BFA' }}>notchnotch-v1.0.0.dmg</a> from
+                GitHub Releases. Drag the app to Applications, then open Terminal once and run:
+              </p>
+              <code className="nn-step-code">xattr -cr /Applications/notchnotch.app</code>
+              <p className="nn-step-note">
+                This clears the macOS quarantine flag — the app is open-source but not yet signed with an Apple certificate.
+              </p>
             </div>
           </div>
           <div className="nn-step">
             <div className="nn-step-number">2</div>
             <div className="nn-step-content">
-              <h4>Guided setup</h4>
+              <h4>Launch &amp; guided setup</h4>
               <p>
-                notchnotch installs the Hermes agent in the background, connects to a
-                free AI model (Nous Portal, zero config), and optionally sets up Telegram.
+                On first open, notchnotch installs the Hermes agent automatically, picks a free AI model
+                (no API key needed), and optionally connects Telegram for mobile access. You don't
+                configure anything — just click through.
               </p>
             </div>
           </div>
@@ -122,35 +130,18 @@ export default function HomePage() {
             <div className="nn-step-content">
               <h4>Hover the notch</h4>
               <p>
-                A chat panel opens. Type your question, press Return. Your agent reads
+                The chat panel opens. Type your question, press Return. Your agent reads
                 files, runs scripts, browses the web, and remembers everything.
               </p>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Install */}
-      <section className="nn-section">
-        <h2 className="nn-section-title">Install</h2>
-        <div className="nn-install">
-          <div className="nn-install-method">
-            <h4>Homebrew (recommended)</h4>
+        <div className="nn-install-alt">
+          <p>
+            <strong>Or with Homebrew:</strong>{' '}
             <code>brew install --cask KikinaStudio/tap/notchnotch --no-quarantine</code>
-          </div>
-          <div className="nn-install-method">
-            <h4>Or download the DMG</h4>
-            <code>
-              <a href="https://github.com/KikinaStudio/Notchnotch/releases" target="_blank" rel="noopener" style={{ color: '#A78BFA', textDecoration: 'underline' }}>
-                GitHub Releases
-              </a>
-              {' '}&rarr; Drag to Applications &rarr; run: xattr -cr /Applications/notchnotch.app
-            </code>
-          </div>
-          <div className="nn-install-method">
-            <h4>Build from source</h4>
-            <code>git clone https://github.com/KikinaStudio/Notchnotch.git && cd NotchNotch && bash scripts/run.sh</code>
-          </div>
+          </p>
         </div>
       </section>
 
