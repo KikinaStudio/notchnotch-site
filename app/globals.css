@@ -363,6 +363,23 @@ html[class~="dark"] {
   border-top: 1px solid var(--nn-border);
 }
 
+/* Nous Research avatar */
+.nn-nous-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 2rem;
+  border: 2px solid var(--nn-border);
+}
+
+.nn-nous-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Hermes capabilities */
 .nn-hermes-capabilities {
   display: grid;

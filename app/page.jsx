@@ -148,6 +148,9 @@ export default function HomePage() {
       {/* What is Hermes */}
       <section className="nn-section">
         <h2 className="nn-section-title">What is Hermes?</h2>
+        <div className="nn-nous-avatar">
+          <img src="/logos/nous-research.webp" alt="NousResearch" />
+        </div>
         <p className="nn-section-subtitle">
           <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener" style={{ color: '#4A9EC4' }}>Hermes</a> is
           an open-source AI agent built by <a href="https://nousresearch.com" target="_blank" rel="noopener" style={{ color: '#4A9EC4' }}>NousResearch</a>.
