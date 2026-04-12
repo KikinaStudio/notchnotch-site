@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'notchnotch — Your MacBook already has an AI agent'
+  title: 'notchnotch · Your MacBook already has an AI agent'
 }
 
 export default function HomePage() {
@@ -14,8 +14,8 @@ export default function HomePage() {
           <span className="nn-highlight">The futchure.</span>
         </p>
         <p className="nn-subtitle">
-          notchnotch puts Hermes — an open-source AI agent that reads your files,
-          runs scripts, browses the web, and handles the tedious stuff — inside
+          notchnotch puts Hermes, an open-source AI agent that reads your files,
+          runs scripts, browses the web, and handles the tedious stuff, inside
           your MacBook's notch. Hover, talk, done.
         </p>
         <div className="nn-cta-group">
@@ -110,7 +110,7 @@ export default function HomePage() {
               </p>
               <code className="nn-step-code">xattr -cr /Applications/notchnotch.app</code>
               <p className="nn-step-note">
-                This clears the macOS quarantine flag — the app is open-source but not yet signed with an Apple certificate.
+                This clears the macOS quarantine flag. The app is open-source but not yet signed with an Apple certificate.
               </p>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function HomePage() {
               <p>
                 On first open, notchnotch installs the Hermes agent automatically, picks a free AI model
                 (no API key needed), and optionally connects Telegram for mobile access. You don't
-                configure anything — just click through.
+                configure anything, just click through.
               </p>
             </div>
           </div>
@@ -169,10 +169,10 @@ export default function HomePage() {
           <div className="nn-hermes-col">
             <h4>What makes it different</h4>
             <ul>
-              <li>40+ built-in tools — not just text generation</li>
+              <li>40+ built-in tools, not just text generation</li>
               <li>Persistent memory across sessions and restarts</li>
               <li>Builds a personal wiki from everything you feed it</li>
-              <li>Runs 100% on your machine — no cloud backend</li>
+              <li>Runs 100% on your machine, no cloud backend</li>
               <li>Extensible via MCP (Model Context Protocol)</li>
             </ul>
           </div>

@@ -7,7 +7,7 @@ import './globals.css'
 export const metadata = {
   title: {
     default: 'notchnotch',
-    template: '%s — notchnotch'
+    template: '%s · notchnotch'
   },
   description:
     'Your MacBook already has an AI agent. It just doesn\'t know it yet. notchnotch puts Hermes inside your notch.',
@@ -49,7 +49,7 @@ const navbar = (
 const footer = (
   <Footer>
     <div className="nn-footer">
-      MIT {new Date().getFullYear()} © KikinaStudio — Built with Nextra
+      MIT {new Date().getFullYear()} © KikinaStudio · Built with Nextra
     </div>
   </Footer>
 )
