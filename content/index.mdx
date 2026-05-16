@@ -1,5 +1,24 @@
 # What is notchnotch?
 
+<div style={{ display: 'flex', justifyContent: 'flex-start', margin: '1.5rem 0' }}>
+  <a
+    href="https://github.com/KikinaStudio/NotchNotch/releases/latest"
+    target="_blank"
+    rel="noopener"
+    style={{
+      display: 'inline-block',
+      padding: '0.75rem 1.25rem',
+      background: '#276282',
+      color: '#fafafa',
+      borderRadius: '8px',
+      fontWeight: 500,
+      textDecoration: 'none'
+    }}
+  >
+    Download for macOS →
+  </a>
+</div>
+
 notchnotch is a native macOS app that turns your MacBook's notch into a portal to your own AI agent. It's not a chatbot — it's a full agent with access to your files, your terminal, the web, and your calendar.
 
 Under the hood, notchnotch talks to [Hermes](https://github.com/NousResearch/hermes-agent), an open-source AI agent by NousResearch. Hermes runs locally on your Mac, keeps persistent memory across sessions, and has 40+ tools at its disposal.
@@ -18,6 +37,7 @@ Here are some things you can ask your agent right out of the box:
 - "Set up a daily routine that sends me a news digest on Telegram every morning"
 - "What meetings do I have tomorrow?"
 - "Read my Downloads folder and tell me what's in there"
+- "Open Mail and reply to Marie — say I'll review the deck tomorrow" — with [Mac control](/docs/computer-use) enabled
 - "Write a Python script that renames all my photos by date"
 - "Remember that my dentist appointment is on March 15th" — it'll save this to its memory
 
@@ -39,6 +59,7 @@ import { Cards } from 'nextra/components'
 <Cards>
   <Cards.Card title="Install notchnotch" href="/docs/getting-started" />
   <Cards.Card title="Learn about the Brain" href="/docs/brain" />
+  <Cards.Card title="Give it Mac control" href="/docs/computer-use" />
   <Cards.Card title="Set up Routines" href="/docs/routines" />
   <Cards.Card title="What is Hermes?" href="/docs/hermes" />
 </Cards>

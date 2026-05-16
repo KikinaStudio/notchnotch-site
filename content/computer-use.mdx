@@ -1,0 +1,113 @@
+# Mac control
+
+Your agent can operate your apps the way you do: open Mail and reply to a thread, file documents in Finder, navigate Safari, look up an address in Maps. Discreet (your cursor never moves), safe (no password, no `sudo`), and under your control (approve-each-action mode by default).
+
+This is **opt-in**. notchnotch ships without Mac control enabled — you choose to give your agent these keys.
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+  Mac control requires Hermes 0.14+ and macOS 14+. The first time you enable it, notchnotch downloads a small helper binary called `cua-driver` (~50 MB). After that, no further downloads.
+</Callout>
+
+## How it works
+
+notchnotch itself never moves your cursor or types into your apps. Mac control is powered by **cua-driver**, a sandboxed helper binary that your agent calls through Hermes. cua-driver runs as your user account, sees what's on screen (with your permission), and performs the actions your agent requests — clicks, typing, scrolling.
+
+You stay in control: by default, your agent **asks** before every sensitive action. You can relax this for trusted routines, or tighten it further.
+
+## Enabling Mac control
+
+Three paths, you pick:
+
+import { Tabs } from 'nextra/components'
+
+<Tabs items={['From the onboarding', 'From Settings', 'From the Tools tab']}>
+  <Tabs.Tab>
+    On a fresh install, the onboarding offers Mac control as step 4 (between "Pick a model" and "Telegram"). Click **Activer**. notchnotch downloads cua-driver, prompts you for the three macOS permissions, and you're done.
+
+    You can skip and enable later — the step is fully optional.
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Open Settings (gear icon, top-right of the notch). Scroll to **Mac control** and click **Installer**. notchnotch downloads cua-driver in the background and walks you through the permissions afterward.
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Open the Brain panel and click the **Tools** tab. Find **Contrôle du Mac** in the Apps section — tap it to see the install button and the permission walkthrough.
+  </Tabs.Tab>
+</Tabs>
+
+## Granting permissions
+
+macOS asks for three permissions the first time cua-driver runs. They're scoped to the cua-driver binary, not to notchnotch itself.
+
+import { Steps } from 'nextra/components'
+
+<Steps>
+### Accessibility
+Allows the agent to read which UI elements are on screen and click them. Open **System Settings → Privacy & Security → Accessibility** and enable `cua-driver`.
+
+### Screen Recording
+Allows the agent to "see" your screen — required so it knows what's there. Open **System Settings → Privacy & Security → Screen Recording** and enable `cua-driver`.
+
+### Automation
+Allows the agent to send AppleScript commands to apps that expose them (Mail, Finder, Safari…). Open **System Settings → Privacy & Security → Automation** and grant cua-driver permission to control the apps you want.
+</Steps>
+
+notchnotch deeplinks you to each pane from the install flow. After you've walked through them, click **C'est bon** to confirm.
+
+<Callout type="warning">
+  notchnotch can't verify these grants for you — macOS scopes them to the cua-driver binary, not to notchnotch. The "C'est bon" button is your confirmation that you've granted access.
+</Callout>
+
+## Approval modes
+
+In Settings → Mac control, pick how your agent confirms each action:
+
+- **Manual** (default) — your agent asks before every sensitive action. Safe. Recommended for daily use.
+- **Smart** — your agent asks only for risky actions (sending an email, deleting a file, modifying system settings). Hermes makes the judgment call.
+- **Off** — your agent acts without asking. Use only for trusted, isolated routines where you've already validated the prompt.
+
+You can change the mode at any time.
+
+## Things to try
+
+- "Open Mail and reply to Marie's last email — say I'll review the deck tomorrow morning"
+- "Find every screenshot I took yesterday and move them to ~/Pictures/2026/screenshots"
+- "Open Spotify and play my Focus playlist"
+- "Look at my Calendar tomorrow and tell me which meetings I should prepare for"
+- "Open this PDF in Preview and find the section about pricing"
+
+## Safety
+
+Mac control runs as your user account. It **cannot**:
+
+- Type your login password
+- Run `sudo` or any other privilege escalation
+- Use Touch ID, Face ID, or Apple Pay
+- Modify the Keychain in ways that require user authentication
+- Access apps you haven't granted in Automation permissions
+
+For destructive actions (delete files, send messages, financial operations), keep the **Manual** approval mode on. notchnotch will never execute trades, transfers, or other financial transactions on your behalf — even with Mac control enabled, those require explicit human action.
+
+## Disabling Mac control
+
+To stop your agent from controlling apps:
+
+- Switch the approval mode to **Off** in Settings (paradoxically — but this means no approval flow runs; the underlying capability stays installed)
+
+To completely uninstall:
+
+- Open Settings → Mac control → **Désinstaller**, or
+- Manually revoke cua-driver from System Settings → Privacy & Security → Accessibility / Screen Recording / Automation
+
+The first removes the binary; the second leaves it installed but blocks all actions until you re-grant permissions.
+
+## Troubleshooting
+
+**Installation fails.** The onboarding shows the error inline. Click **Réessayer** to try again — the most common cause is a network blip during the download. You can also install manually by running `hermes computer-use install` in Terminal.
+
+**The agent can't see/click in a specific app.** That app needs to be granted in Automation permissions. Open System Settings → Privacy & Security → Automation and grant cua-driver permission for that app.
+
+**Actions are too slow / out of date.** macOS Tahoe (26+) is recommended for the smoothest interaction. Older versions work but with slightly higher latency.
+
+**Where does cua-driver live?** It's installed to `~/.local/bin/cua-driver` by the upstream installer ([trycua/cua](https://github.com/trycua/cua)). Logs land in `~/.hermes/logs/`.

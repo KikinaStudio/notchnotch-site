@@ -2,9 +2,9 @@
 
 Routines are automated tasks that your agent runs on a schedule. A morning news digest, a price tracker, a daily health reminder — set it up once and your agent handles the rest.
 
-## Opening the Routines panel
+## Opening Routines
 
-Click the burger menu icon (top-right of the notch), then the clock icon. The Routines panel shows your active routines and a link to the template browser.
+Hover the right side of the notch and click the **Missions** icon in the burger menu. Routines live inside the Missions tab of the Brain panel — alongside the activity banner (cost, sessions, routine health). The tab opens directly to your active routines with a `+ New` button in the header.
 
 ![Active routines panel](/screenshots/routines.png)
 
@@ -38,12 +38,15 @@ Each template has a title, subtitle, and a preview of what it does.
 ![Template list within a category](/screenshots/routines-templates.png)
 
 ### Fill in the form
-Templates have structured inputs — text fields, pickers, number fields.
+Templates have structured inputs — text fields, pickers, number fields, and file attachments. No free-text drafts to rewrite, no guessing at what the template expects.
 
 ![Template configuration form](/screenshots/routines-config.png) For example, the "Morning News Digest" template asks for your preferred topics, city (for weather), and tone (formal/casual).
 
+### Pick a frequency
+Tap a capsule — **Daily**, **Weekdays**, or **Custom…** — and set the time with the inline picker right next to it. No cron expressions, ever.
+
 ### Create routine
-Click "Create routine". notchnotch composes a natural-language prompt from your inputs and sends it to your agent. Hermes creates the cron job using its built-in `cronjob` tool.
+Click "Create routine". notchnotch composes a natural-language prompt from your inputs and sends it to your agent. Hermes schedules the job — you never touch cron syntax.
 </Steps>
 
 ### Create your own
@@ -56,33 +59,36 @@ Your agent understands schedules, delivery methods, and conditions.
 
 ## Monitoring routines
 
-Active routines appear as cards with:
+Active routines appear as single-line rows in a compact list, separated by hairline dividers — the same density as Memory blocks or conversation history. Each row shows:
 
-- **Status dot** — green (scheduled), orange (paused), pulsing violet (currently running)
-- **Human-readable schedule** — "Daily at 9 AM", "Every Monday and Thursday at 6 PM"
-- **Run count** — how many times it has executed
-- **Next execution time** — when it will run next
+- **Type icon** — eye (silent), calendar (digest), or bell (alert), based on the prompt and cadence
+- **Name** + **human-readable schedule** — "Daily at 9 AM", "Every Monday and Thursday at 6 PM"
+- **Status pill** — `active`, `failed`, or `paused`, with a color-coded dot. The pill is the toggle: click it to pause or resume, with optimistic feedback so the state flips instantly.
+- **Tooltip** — hover for run count, last run timestamp, next run, and the error reason if the job failed
 
-Cards highlight on hover.
+Tap any row to open the edit form. Right-click for quick actions: **Talk about this routine**, **Pause / Resume**, **Remove**.
 
-## Managing routines
+## Editing routines
 
-Right-click any routine card for quick actions:
+Tap any routine card to open it in a Notion-style edit form. You can change:
 
-- **Change schedule** — modify when it runs
-- **Pause / Resume** — temporarily disable or re-enable
-- **Remove** — delete the routine
+- **Name**
+- **Prompt** — what the agent does each run
+- **Schedule** — same Daily / Weekdays / Custom pills + inline time picker as creation
+- **Delivery** — chat, Telegram, Discord, Slack, etc.
+
+Save lands instantly through `PATCH /api/jobs/{id}`. No round-trip through the chat, no asking your agent to "edit the routine".
 
 import { Callout } from 'nextra/components'
 
 <Callout type="info">
-  All routine management goes through the chat. When you right-click and select an action, notchnotch sends a natural-language request to your agent, which handles the cron API. You never deal with cron syntax directly.
+  Pre-existing routines with non-roundtrippable schedules (sub-hourly intervals, custom ranges) keep name / prompt / delivery editable, with the schedule shown read-only. Recreate the routine if you need to change a schedule of that shape.
 </Callout>
 
 ## Delivery
 
 Routines can deliver results through:
 
-- **The chat** — appears as a regular message next time you open the notch
+- **The chat (Notch)** — when the notch is closed, an amber-clock toast appears with the routine name and the first line of the result. Tap the toast to expand the full content as a message and continue the conversation. Local routines that deliver to the notch also get a **Refine** wand button on their message — tap it to pre-fill the composer with a primer and rewrite the routine through chat.
 - **Telegram** — sent to your Telegram bot (requires [Telegram setup](/docs/telegram))
 - **Discord, Slack, and more** — if you've configured those gateways in Hermes

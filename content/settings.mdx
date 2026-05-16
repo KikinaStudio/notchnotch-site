@@ -1,19 +1,26 @@
 # Settings
 
-Click the gear icon (top-right of the notch) to open Settings.
+Hover the right side of the notch and click the gear icon to open Settings.
 
 ## AI Provider
 
-Choose which AI service powers your agent:
+Choose which AI service powers your agent. notchnotch supports 11 providers natively, plus a Custom slot for any OpenAI-compatible endpoint.
 
 | Provider | What you need |
 |----------|--------------|
 | **Nous Portal** | Nothing — free, zero config. Selected by default during onboarding |
-| **OpenRouter** | An API key from [openrouter.ai](https://openrouter.ai) |
+| **OpenRouter** | An API key from [openrouter.ai](https://openrouter.ai), or one-click OAuth |
 | **OpenAI** | An API key from [platform.openai.com](https://platform.openai.com) |
 | **Anthropic** | An API key from [console.anthropic.com](https://console.anthropic.com) |
+| **Gemini** | An API key from [aistudio.google.com](https://aistudio.google.com) |
+| **MiniMax** | An API key from [platform.minimaxi.com](https://platform.minimaxi.com) |
+| **HuggingFace** | A token from [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) |
+| **Z.AI** | An API key from [z.ai](https://z.ai) |
+| **Kimi-Coding** | An API key from Moonshot AI |
+| **Xiaomi** | An API key from MiMo |
+| **Custom** | Any OpenAI-compatible endpoint (Ollama, vLLM, NIM, …) — set the base URL and an optional API key |
 
-Paste your API key in the text field. It is stored locally in Hermes's config file (`~/.hermes/config.yaml`) on your Mac. It is never sent anywhere except to the provider you selected.
+Each provider shows a monochrome brand icon (via [Simple Icons](https://simpleicons.org/)) so you can pick at a glance. Paste your API key in the inline field and it's stored locally in Hermes's `~/.hermes/.env` and `~/.hermes/config.yaml`. Keys are never sent anywhere except to the provider you selected.
 
 import { Callout } from 'nextra/components'
 
@@ -21,30 +28,69 @@ import { Callout } from 'nextra/components'
   Switching providers may change which models are available. Some models are better at tool use than others — if your agent starts struggling with tasks it used to handle, try a different model.
 </Callout>
 
+### Custom model IDs
+
+Each provider has a default model dropdown. If you need a specific model that isn't listed, click **Add custom model ID** in the Advanced section. notchnotch remembers your custom IDs per-provider in app settings — they appear in the picker alongside the defaults.
+
+## Memory provider
+
+By default, your agent's long-term memory lives in flat `~/.hermes/memories/*.md` files (the **built-in** provider). You can switch to other backends for richer retrieval or cross-device sync:
+
+- **Built-in** (default) — local Markdown files. No setup, no network calls.
+- **Hindsight** — local vector index. Sharper recall, still 100% on-device.
+- **Holographic** — local high-dimensional binding. Still on-device.
+- **mem0**, **Supermemory**, **OpenViking**, **RetainDB**, **Byterover** — cloud providers. Each one needs an API key (notchnotch shows an inline field after you pick the provider).
+
+Local providers work immediately. Cloud providers may need pip dependencies — if responses start failing with an `ImportError`, run `hermes memory setup` once in Terminal to install them. notchnotch surfaces this hint inline next to the picker when you select a non-local provider.
+
+## Connect Google
+
+Click **Connect Google** to give your agent access to Calendar, Gmail, Drive, and Docs. notchnotch opens your browser through a native PKCE OAuth flow, you click consent, and the credentials are written to `~/.hermes/google_token.json` in the format the `google-workspace` skill expects.
+
+No tokens to copy. No JSON to paste. No Cloud Console projects to create.
+
+After connecting, ask your agent things like:
+
+- "What's on my calendar tomorrow?"
+- "Draft a reply to the latest email from Marie"
+- "Find the spreadsheet I shared with the design team last week"
+
+To disconnect, click **Disconnect** in the same row — notchnotch deletes the token file.
+
+## Mac control
+
+This section appears once you've enabled [Mac control](/docs/computer-use). It exposes the approval mode for sensitive actions:
+
+- **Manual** (default) — your agent asks before every sensitive action. Safe.
+- **Smart** — your agent asks only for risky actions (sending an email, deleting a file). Hermes makes the judgment call.
+- **Off** — your agent acts without asking. Use only for trusted, isolated routines.
+
+You can also re-install cua-driver from here if anything goes wrong, or open the macOS privacy panes directly to re-grant a permission.
+
 ## Agent
 
-- **Max iterations** — controls how many steps your agent can take before giving up. Options:
+- **Max iterations** — controls how many steps your agent can take before giving up:
   - **Quick** — fewer steps, faster responses, good for simple questions
   - **Normal** — balanced (default)
   - **Deep** — more steps, better for complex multi-step tasks
-- **Streaming** — toggle streaming responses on/off
+- **Streaming** — toggle live streaming of responses on/off. With streaming on, you see the agent's reasoning and tool calls in real time.
 
 ## Execution
 
-Controls how your agent runs commands:
+Controls where your agent runs commands:
 
-- **Local** — commands run directly on your Mac (default)
+- **Local** (default) — commands run directly on your Mac
 - **Docker** — commands run inside a Docker container (more isolated)
 - **SSH** — commands run on a remote machine
 
 For most users, "Local" is the right choice.
 
-## Session
+## Appearance
 
-Shows the status of your auto-linked Telegram session:
+- **Text size** — Medium (default) or Large for chat bubbles and Brain content
+- **Panel size** — Standard (680×380) or Large (up to 900×600, clamped on small displays). Toggle in real time from the panel's resize button too.
 
-- Whether a Telegram session was detected
-- The session ID being used
-- Connection status
+## App
 
-If no Telegram session is found, this section explains how to set one up.
+- **Launch at login** — start notchnotch automatically when you log in
+- **Updates** — check for updates manually, see the current version, and review past releases. notchnotch auto-checks daily; new versions install with one click via Sparkle.

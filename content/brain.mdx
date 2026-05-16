@@ -1,84 +1,102 @@
 # Brain
 
-The Brain is everything your agent knows. It's a combination of facts it has learned from your conversations, skills it can use, and articles it has written or that you've fed it. You can browse all of this from the Brain panel, and you can feed it new information in several ways.
+The Brain is everything your agent knows and everything it can do for you. Memories accumulated across conversations, apps it can talk to, technical capabilities it can call. You browse all of this from the Brain panel.
 
 ## Opening the Brain panel
 
-Click the burger menu icon (top-right of the notch when it's open), then click the brain icon. The panel has three tabs: Memory, Skills, and Wiki.
+Hover the right side of the notch to reveal the burger menu, then click one of the three section icons. The panel opens directly to that section.
+
+The panel has three tabs:
+
+- **Memory** — facts, preferences, and articles your agent has accumulated about you and the world
+- **Tools** — apps it can talk to (Gmail, Drive, Spotify…) and technical capabilities it can call
+- **Missions** — routines that run on a schedule
+
+You can also switch tabs by clicking the corresponding icon in the right burger menu while the panel is open.
 
 ## Memory
 
-![Memory tab with saved facts and context](/screenshots/brain-memory.png)
+The Memory tab is a flat scrollable feed of thematic blocks parsed from your agent's memory files — facts, project context, people's details, your preferences. Each block has a category-aware leading icon so you can scan quickly.
 
-The Memory tab shows cards parsed from your agent's memory files. Each card is a thematic block: a fact, a project context, a person's details, your preferences.
-
-For example, after a few conversations your agent might have cards like:
+For example, after a few conversations your agent might have entries like:
 
 - "User prefers dark roast coffee, lives in Paris"
 - "Project NotchNotch: macOS app, Swift/SwiftUI, talks to Hermes on localhost:8642"
 - "Dentist appointment on March 15th"
 
-Your agent builds this memory automatically from your conversations. You can also feed it explicitly (see below).
+Tap any block to expand it. Hover to reveal pencil (edit) and trash (delete) icons. Edits go through your agent — you describe what you want changed, and Hermes rewrites the file.
 
-## Skills
+### Wiki articles
 
-![Skills tab listing agent capabilities](/screenshots/brain-skills.png)
+Below the memory blocks (when you have any) sits the wiki section. When you feed your agent raw information (articles you clip, documents you drop, notes), it compiles them into structured wiki articles with backlinks.
 
-The Skills tab lists all installed agent skills with category badges and descriptions. These are capabilities that extend what your agent can do — web browsing, file management, calendar access, and more.
+The wiki dashboard shows:
 
-Tap any skill to see its full description.
-
-## Wiki
-
-![Wiki tab with knowledge base articles](/screenshots/brain-wiki.png)
-
-The Wiki tab is a Karpathy-style knowledge base. When you feed your agent raw information (articles, documents, notes), it compiles them into structured wiki articles with backlinks.
-
-The wiki tab shows:
-
-- Total article count
-- Last-updated timestamp
-- An **"Ask"** button on each article — tap it to send a question about that article directly to your agent
+- Total topic count
+- Last-ingestion timestamp (e.g. "Last integration 2h ago")
+- A **sync button** that pulls in newly-saved raw content waiting to be processed
+- An **Ask** button on each article — tap it to ask your agent about that topic
 
 The wiki tab is a launchpad, not a reader. Your agent answers questions about its wiki articles through the chat.
 
-## Feeding the brain
+### Feeding the brain
 
-There are several ways to add knowledge to your agent's brain:
+There are several ways to add knowledge:
 
+import { Steps } from 'nextra/components'
+
+<Steps>
 ### Drag and drop
-
-Drag any file onto the notch. When the drop zone appears, drop it on the **right side** (brain icon) to save it to memory, or on the **left side** (chat icon) to attach it to the current message.
-
-Supported formats: images, PDFs, code (35+ languages), text, CSV, JSON, YAML.
+Drag any file onto the notch. When the drop zone appears, drop it on the **right side** (brain icon) to save it to memory. Supported formats: images, PDFs, code (35+ languages), text, CSV, JSON, YAML.
 
 ### Voice memos
-
-Triple-tap the Control key from any app to start recording. When you're done, you get two options:
-
-- **Talk** — transcribes and sends as a chat message
-- **Brain Dump** — transcribes and saves directly to your agent's memory
-
-This is great for quick thoughts, meeting notes, or ideas you want your agent to remember without starting a conversation.
+Triple-tap the Control key from any app to start recording. Pick **Brain Dump** to transcribe and save directly to your agent's memory.
 
 ### Paste images
-
 Press Cmd+V with an image in your clipboard. The image is saved and can be sent to the brain.
 
 ### NotchNotch Clipper
-
-The [NotchNotch Clipper](/docs/clipper) is a Chrome extension that clips any web page straight into your agent's brain. One click, and the page content is saved.
+The [NotchNotch Clipper](/docs/clipper) Chrome extension clips any web page straight into your agent's brain. One click and the page content is saved.
 
 ### Through conversation
-
 Simply tell your agent to remember something:
 
 > "Remember that the project deadline is June 15th"
 
-> "Save this recipe to your memory: ..."
+Your agent uses its memory tool to store the information.
+</Steps>
 
-Your agent uses its memory tool to store the information. It decides whether to put it in its fact memory or process it into a wiki article.
+## Tools
+
+The Tools tab is where you wire your agent to the rest of your digital life. It's split into two sections.
+
+### Apps
+
+A 3-column grid of curated services your agent can talk to: Gmail, Google Drive, Google Calendar, Notion, Spotify, and more. Each card is a one-tap connection — sign in with your account, the agent gets the right scopes.
+
+- **Connected apps** appear with a bright brand icon and the service name in primary text
+- **Available apps** are dimmed — tap them to connect
+
+Click any card to open its detail view: how to connect, what prompts you can try, and a disconnect button. Google services use the native OAuth PKCE flow (browser opens, you click consent, done — no API keys to paste). API-key services have an inline field. Spotify uses the `hermes auth spotify login` CLI and the green dot lights up automatically once you finish.
+
+This is intentionally structured UI, not chat-mediated configuration: you can see what's plugged in at a glance and disconnect with a single click.
+
+### Capacités
+
+Below Apps sits a searchable catalogue of technical capabilities — the toolset your agent embarks with. Things like web search, file management, image generation, terminal access, calendar tools, MCP integrations. Grouped by category, with a search field at the top and a `+ Parcourir` button on the right to open the **Skills Hub** — Hermes's marketplace of installable skills.
+
+The first category, **Installées**, lists skills you've added through the hub so you can find them again easily. The rest are bundled by Hermes out of the box.
+
+Tap any capability to see its full description, the kind of prompts that trigger it, and a `Voir dans le Finder` button if you want to inspect the SKILL.md source.
+
+## Missions
+
+Routines that run on a schedule. A morning news digest, a price tracker, a daily health reminder — set it up once, your agent handles the rest.
+
+See [Routines](/docs/routines) for the full guide on templates, scheduling, editing, and delivery channels.
+
+Above the routines list sits a small activity banner with three signals at a glance: this month's API cost (with a linear forecast for month-end), a 7-day session sparkline, and routine health (failed jobs flagged in red).
 
 ## Refreshing the brain
 
-The Brain panel loads data once when you open it. If you've just saved new content (via drag-and-drop, voice memo, or the Clipper), click the refresh button to reload.
+The Brain panel refreshes itself on a 60-second timer for light metrics (cost, pending raw files, wiki freshness). For a full reload — after a Clipper save, a voice memo, or any change you made through the chat — click the refresh button in the panel header.

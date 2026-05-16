@@ -6,7 +6,7 @@ The chat panel is where you talk to your agent. It opens when you hover or click
 
 ## Sending messages
 
-Type your message in the input bar and press **Return** to send. Your agent processes the request and streams the response.
+Type your message in the input bar and press **Return** to send. Your agent processes the request and streams the response token by token — you see words appear as they're generated, not after a long wait.
 
 While your agent is thinking, the send button turns into a spinning braille animation. Click it to cancel the request.
 
@@ -54,7 +54,12 @@ When your agent's response contains a file path:
 
 ## Thinking and tool calls
 
-Your agent sometimes reasons internally before responding, and often uses tools (reading files, running commands, browsing the web). This activity is hidden behind collapsible toggles so you only see the clean answer. Expand them if you're curious.
+Your agent sometimes reasons internally before responding, and often uses tools (reading files, running commands, browsing the web). You see both happen **live**:
+
+- **Thinking preview** — reasoning tokens appear in the bubble as they arrive, then collapse behind a toggle once the agent moves on
+- **Tool-call preview** — each tool shows up the moment it fires, with its name and first argument (e.g. `read_file: ~/Downloads/notes.md`). No waiting for the whole turn to finish to see what the agent did
+
+Expand any collapsed block if you want to inspect the full trace. Once you trust your agent, you can stop looking.
 
 ## Toast notifications
 

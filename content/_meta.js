@@ -3,6 +3,7 @@ export default {
   'getting-started': 'Getting Started',
   'chat': 'Chat',
   'brain': 'Brain',
+  'computer-use': 'Mac control',
   'routines': 'Routines',
   'telegram': 'Telegram',
   'voice': 'Voice Memos',
