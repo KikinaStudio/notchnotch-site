@@ -7,7 +7,7 @@ export default function HomePage() {
     <main>
       {/* Hero */}
       <section className="nn-hero">
-        <div className="nn-badge">macOS 14+ &middot; Universal (Intel + Apple Silicon) &middot; v1.3.2</div>
+        <div className="nn-badge">macOS 14+ &middot; Universal (Intel + Apple Silicon) &middot; v1.4.0</div>
         <p className="nn-slogan">
           Notch Notch!<br />
           Who's there?<br />
