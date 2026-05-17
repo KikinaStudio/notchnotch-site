@@ -28,13 +28,18 @@ import { Callout } from 'nextra/components'
 
 ## Hermes is not responding
 
-Check if Hermes is running:
+Since v1.4.0 notchnotch installs a user LaunchAgent (`~/Library/LaunchAgents/ai.hermes.gateway.plist`) that auto-starts Hermes at login and respawns it on crash — so you should never have to start it by hand. If you still see *"Hermes ne répond pas"*, the actionable toast is now **tappable**: tap it and notchnotch reinstalls the LaunchAgent, kickstarts the gateway, polls `/health`, and replays your last message.
+
+You can also drive it manually from **Réglages → Hermes** (status pill + Installer / Redémarrer / Désinstaller / Voir les logs).
+
+To check by hand:
 
 ```bash
 curl http://localhost:8642/health
+launchctl print gui/$(id -u)/ai.hermes.gateway   # plist loaded?
 ```
 
-If you get no response, Hermes is not running. notchnotch starts it automatically during onboarding, but if it crashed:
+If the LaunchAgent isn't installed and the toast tap doesn't fix it, you can fall back to a one-shot launch:
 
 ```bash
 cd ~/.hermes/hermes-agent && ./venv/bin/python3 hermes gateway run
@@ -43,6 +48,24 @@ cd ~/.hermes/hermes-agent && ./venv/bin/python3 hermes gateway run
 <Callout type="info">
   Hermes must be started with `./venv/bin/python3`, not system Python. System Python on macOS is 3.9, and Hermes requires 3.10+.
 </Callout>
+
+### Hermes runs but `/health` still 404s
+
+From v1.4.0 onwards notchnotch writes `API_SERVER_ENABLED=true` and `API_SERVER_CORS_ORIGINS=*` into `~/.hermes/.env` automatically (during onboarding for fresh installs, at every boot for upgrades). Without these flags Hermes runs in cron-only mode and the HTTP port stays closed — which used to break the chat silently for users with no messaging platform configured.
+
+If you explicitly set `API_SERVER_ENABLED=false` in your `.env`, notchnotch respects that and does NOT overwrite it. Set it back to `true` (or remove the line) and relaunch notchnotch.
+
+## Free OpenRouter model returns HTTP 402
+
+OpenRouter's free tier rejects requests where the computed `max_tokens` exceeds ~13K tokens per request. Since v1.4.0, notchnotch caps `model.max_tokens` to **8000** in `~/.hermes/config.yaml` automatically whenever you pick a `:free` model in Settings. Switching back to a paid model removes the cap so Hermes resumes its natural calculation from `context_length`.
+
+If you're on v1.4.0+ and still hitting 402, verify `max_tokens` is present under `model:` in your config:
+
+```bash
+grep -A4 '^model:' ~/.hermes/config.yaml
+```
+
+If not, switch to a different model and back to your `:free` choice — that re-runs the cap logic.
 
 ## Messages are slow
 

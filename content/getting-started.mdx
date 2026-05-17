@@ -72,6 +72,8 @@ A quick explanation of what stays local and what goes to your AI provider. Every
 ### Install Hermes
 Hermes (the AI agent engine) installs automatically in the background. This takes about a minute. You don't have to do anything.
 
+Since v1.4.0, notchnotch also installs a user LaunchAgent at the end of this step (`~/Library/LaunchAgents/ai.hermes.gateway.plist`). That means Hermes auto-starts at every login and respawns if it crashes — **you never have to open Terminal to start it**. You can fully close notchnotch, reboot your Mac, come back the next day, and your first message just works.
+
 ![Hermes installation loading screen](/screenshots/onboarding-loading.png)
 
 ### Pick a model
